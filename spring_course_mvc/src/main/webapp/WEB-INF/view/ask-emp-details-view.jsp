@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,35 +7,45 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ask Detail</title>
-    <style type="text/css">
-        body {
-            background: #96C3EB;
-        }
-        
-        .heading {
-            font-size: 22px;
-            text-align: center;
-        }
-
-        .form_input {
-            background-color: #6ACCBC;
-        }
-        
-        .form_submit {
-            background-color: #158FAD;
-            color: white;
-            border-radius: 5px;
-            border-color: cornflowerblue;
-        }
-    </style>
 </head>
 <body>
 <h2 class="heading">Dear Employee, please enter your details</h2>
 <br>
-<form class="form" action="showDetails" method="get">
+<form:form action="showDetails" modelAttribute="employee">
+
+    Name <form:input path="name"/>
+    <br>
+    Surname <form:input path="surname"/>
+    <br>
+    Salary <form:input path="salary"/>
+    <br>
+    Department
+    <form:select path="department">
+        <form:options items="${employee.departments}"/>
+        <%--        <form:option value="Information Technology" label="IT"/>
+                <form:option value="Human Resources" label="HR"/>
+                <form:option value="Sales" label="Sales"/>--%>
+    </form:select>
+    <br>
+    Which car do you want?
+    BMW <form:radiobutton path="carBrand" value="BMW"/>
+    Porsche <form:radiobutton path="carBrand" value="Porsche"/>
+    Lada <form:radiobutton path="carBrand" value="Lada"/>
+    <br>
+    Foreign languages:
+    English <form:checkbox path="languages" value="English"/>
+    French <form:checkbox path="languages" value="French"/>
+    Deutch <form:checkbox path="languages" value="Deutch"/>
+    <br>
+    <input type="submit" value="OK">
+
+</form:form>
+
+
+<%--<form class="form" action="showDetails" method="get">
     <input class="form_input" type="text" name="employeeName" placeholder="Enter your name"/>
 
     <input class="form_submit" type="submit"/>
-</form>
+</form>--%>
 </body>
 </html>
