@@ -1,14 +1,31 @@
 package io.github.liuminol.spring.mvc;
 
+import io.github.liuminol.spring.mvc.validation.CheckEmail;
+
+import javax.validation.constraints.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Employee {
+    @Size(min = 2, message = "Name must be minimum two symbols")
     private String name;
+
+    @NotEmpty(message = "surname is required field") // поле не должно быть пустым и null
+    @NotBlank(message = "surname is required field") //поле на должно быть заполнено только пробелами
     private String surname;
+
+    @Min(value = 500, message = "value must be greater that 499")
+    @Max(value = 1000, message = "value must be less that 1001")
     private int salary;
     private String department;
     private String carBrand;
+
+    @Pattern(regexp = "\\d{3}-\\d{2}-\\d{2}", message = "please use pattern XXX-XX-XX")
+    private String phoneNumber;
+
+    @CheckEmail(value = "abc.com", message = "email must be ends with abs.com")
+    private String email;
     private String[] languages;
     private Map<String, String> departments;
 
@@ -75,6 +92,22 @@ public class Employee {
         this.languages = languages;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -82,6 +115,11 @@ public class Employee {
                 ", surname='" + surname + '\'' +
                 ", salary=" + salary +
                 ", department='" + department + '\'' +
+                ", carBrand='" + carBrand + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", languages=" + Arrays.toString(languages) +
+                ", departments=" + departments +
                 '}';
     }
 }

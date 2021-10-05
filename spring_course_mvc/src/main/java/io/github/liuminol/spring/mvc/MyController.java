@@ -2,11 +2,13 @@ package io.github.liuminol.spring.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/employee")
@@ -30,12 +32,15 @@ public class MyController {
     }
 
     @RequestMapping("/showDetails")
-    public String showEmpDetails(@ModelAttribute ("employee") Employee emp) {
-        String name = emp.getName();
+    public String showEmpDetails(@Valid @ModelAttribute ("employee") Employee emp, BindingResult bindingResult) {
+//        String name = emp.getName();
+//
+//        emp.setName("Mr. " + name);
+//        emp.setSalary(emp.getSalary() * 2);
 
-        emp.setName("Mr. " + name);
-        emp.setSalary(emp.getSalary() * 2);
-
+        if (bindingResult.hasErrors()) {
+            return "ask-emp-details-view";
+        }
         return "show-emp-details-view";
     }
 
