@@ -30,28 +30,54 @@
             padding: 7px;
             font-size: 20px;
         }
+
+        .button {
+            padding: 5px;
+            font-weight: bold;
+            color: white;
+            border-style: none;
+            background-color: dodgerblue;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .button--add {
+            display: block;
+            margin: 0 auto;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
-    <h1 class="heading">All Employees</h1>
+<h1 class="heading">All Employees</h1>
 
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Operations</th>
+    </tr>
+    <c:forEach var="emp" items="${allEmps}">
+
+        <c:url var="updateButton" value="/updateInfo">
+            <c:param name="empId" value="${emp.id}"/>
+        </c:url>
+
         <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Department</th>
-            <th>Salary</th>
+            <td>${emp.name}</td>
+            <td>${emp.surname}</td>
+            <td>${emp.department}</td>
+            <td>${emp.salary}</td>
+            <td>
+                <input class="button" type="button" value="Update" onclick="window.location.href='${updateButton}'">
+            </td>
         </tr>
-        <c:forEach var="emp" items="${allEmps}">
 
-            <tr>
-                <td>${emp.name}</td>
-                <td>${emp.surname}</td>
-                <td>${emp.department}</td>
-                <td>${emp.salary}</td>
-            </tr>
+    </c:forEach>
+</table>
 
-        </c:forEach>
-    </table>
+<input class="button button--add" type="button" value="Add" onclick="window.location.href='addNewEmployee'"/>
 </body>
 </html>

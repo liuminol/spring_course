@@ -16,11 +16,22 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional //Spring берет на себя ответственность за открытие и закрытие транзакций
     public List<Employee> getAllEmployees() {
         Session session = sessionFactory.getCurrentSession();
         List<Employee> allEmployees = session.createQuery("from Employee", Employee.class).getResultList();
 
         return allEmployees;
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(employee);
+    }
+
+    @Override
+    public Employee getEmployee(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Employee.class, id);
     }
 }
