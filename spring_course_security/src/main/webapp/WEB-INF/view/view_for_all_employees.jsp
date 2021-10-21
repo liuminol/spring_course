@@ -1,3 +1,4 @@
+<%@ taglib prefix="secutiry" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,11 +12,19 @@
 
     <h3>Information for all employees</h3>
     <br>
-    <input type="button" value="salary" onclick="window.location.href='hr_info'">
-    Only for HR staff
+
+    <secutiry:authorize access="hasRole('HR')">
+        <input type="button" value="salary" onclick="window.location.href='hr_info'">
+        Only for HR staff
+    </secutiry:authorize>
+
     <br>
     <br>
-    <input type="button" value="performance" onclick="window.location.href='manager_info'">
-    Only for Managers
+
+    <secutiry:authorize access="hasRole('MANAGER')">
+        <input type="button" value="performance" onclick="window.location.href='manager_info'">
+        Only for Managers
+    </secutiry:authorize>
+
 </body>
 </html>
