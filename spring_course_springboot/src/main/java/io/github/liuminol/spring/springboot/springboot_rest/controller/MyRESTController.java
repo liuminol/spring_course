@@ -36,7 +36,7 @@ public class MyRESTController {
         return employee;
     }
 
-    @PutMapping("/empoyees")
+    @PutMapping("/employees")
     public Employee updateEmployee(@RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
 
