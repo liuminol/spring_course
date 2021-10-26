@@ -44,6 +44,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").hasAnyRole("EMPLOYEE", "HR", "MANAGER")
                 .antMatchers("/hr_info").hasRole("HR")
                 .antMatchers("/manager_info").hasRole("MANAGER")
-                .and().formLogin().permitAll();
+                .and()
+                .formLogin().permitAll();
     }
 }
