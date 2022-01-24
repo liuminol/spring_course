@@ -4,3 +4,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: bestuser
     password: bestuser
+
+server:
+  port: 8000
